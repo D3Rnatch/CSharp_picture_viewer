@@ -1,1 +1,7 @@
 D:\TPs\FrameworkCE\pictureViewer_model\pictureViewer_model\bin\Debug\pictureViewer_model.exe.config
+D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\bin\Debug\pictureViewer_model.exe.config
+D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\bin\Debug\pictureViewer_model.exe
+D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\bin\Debug\pictureViewer_model.pdb
+D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.csprojResolveAssemblyReference.cache
+D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.exe
+D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.pdb
