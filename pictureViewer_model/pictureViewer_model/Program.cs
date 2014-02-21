@@ -117,6 +117,8 @@ namespace pictureViewer_model
             return ret;
         }
 
+        //================ SERILIZER ZONE =================//
+        #region serializer
         static public void Serialize(Album details)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Album));
@@ -135,5 +137,51 @@ namespace pictureViewer_model
             reader.Close();
             return details;
         }
+
+        #endregion
+
+        //======== FILE EXPLORER & RECENSORS =================//
+        #region explorer
+        static IEnumerable<string> EnumeratePaths(string root)
+        {
+            if (root == null)
+                throw new ArgumentNullException("root");
+            if (!Directory.Exists(root))
+                throw new ArgumentException("Invalid root path", "root");
+
+            if (root.Length > 3)
+                root = Path.GetDirectoryName(root + "\\");
+
+            Queue<string> queue = new Queue<string>();
+            queue.Enqueue(root);
+
+            while (queue.Count > 0)
+            {
+                string curr = queue.Dequeue();
+                bool failed = false;
+                try
+                {
+                    foreach (var path in Directory.GetDirectories(curr))
+                        queue.Enqeue(path);
+                }
+                catch
+                {
+                    failed = true;
+                }
+                if (!failed)
+                    yield return curr;
+            }
+        }
+
+        static IEnumerable<string> EnumerateFiles(string root)
+        {
+            var paths = EnumeratePaths(root);
+            foreach (var nxt in paths)
+            {
+                foreach (var filename in Directory.GetFiles(nxt))
+                    yield return filename;
+            }
+        }
+        #endregion
     }
 }
