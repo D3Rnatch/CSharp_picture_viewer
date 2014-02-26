@@ -162,7 +162,7 @@ namespace pictureViewer_model
                 try
                 {
                     foreach (var path in Directory.GetDirectories(curr))
-                        queue.Enqeue(path);
+                        queue.Enqueue(path);
                 }
                 catch
                 {

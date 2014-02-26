@@ -5,3 +5,9 @@ D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\bin\Debu
 D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.csprojResolveAssemblyReference.cache
 D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.exe
 D:\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.pdb
+C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\bin\Debug\pictureViewer_model.exe.config
+C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.exe
+C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.pdb
+C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\obj\Debug\pictureViewer_model.csprojResolveAssemblyReference.cache
+C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\bin\Debug\pictureViewer_model.exe
+C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\pictureViewer_model\pictureViewer_model\bin\Debug\pictureViewer_model.pdb
