@@ -14,12 +14,15 @@ namespace MyPictures
     {
         private int changePicture;
         private int timerInit;
+        private List<Picture> contents;
+        Bitmap img; //nouvelle image cree pr adapter les dimensions
 
-        public Slideshow()
+        public Slideshow(List<Picture> content)
         {
             this.WindowState = FormWindowState.Maximized;
+            this.contents = content;
             changePicture = 0;
-            timerInit = 0;
+            timerInit = 100;
             this.Show();
             InitializeComponent();
             autoCenterFlowPanel();
@@ -33,25 +36,37 @@ namespace MyPictures
             container_slideshow.Location = new Point((this.Width - container_slideshow.Width )/ 2, (this.Height - container_slideshow.Height )/ 2);
         }
 
+        private void putImageOnPictureBox()
+        {
+            img = new Bitmap(Image.FromFile(contents[changePicture].fname), slideshow_picture.Size);
+            slideshow_picture.Image = img;
+        }
+
         private void button_play_Click(object sender, EventArgs e)
         {
 
             if (timer.Enabled == true)
+            { 
                 timer.Enabled = false;
+                button_play.Image = Properties.Resources.PlayPlay;
+            }
             else
             {
                 timer.Enabled = true;
                 //on donne un pas
-                timerInit =100;
+                button_play.Image = Properties.Resources.pause;
+               
+                
             }
             
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (changePicture < listTextSlideshow.Images.Count)
+            
+            if (changePicture < contents.Count)
             {
-                slideshow_picture.Image = listTextSlideshow.Images[changePicture];
+                putImageOnPictureBox();
                 changePicture++;
             }
             else
@@ -101,22 +116,21 @@ namespace MyPictures
             {
                 this.SuspendLayout();
                 changePicture--;
-                slideshow_picture.Image = listTextSlideshow.Images[changePicture];
+                putImageOnPictureBox();
                 this.ResumeLayout();
             }
         }
 
         private void button_next_Click(object sender, EventArgs e)
         {
-            if (timer.Enabled == false&&changePicture<listTextSlideshow.Images.Count-1)
+            if (timer.Enabled == false&&changePicture<contents.Count-1)
             {
                 this.SuspendLayout();
                 changePicture++;
-                slideshow_picture.Image = listTextSlideshow.Images[changePicture];
+                putImageOnPictureBox();
                 this.ResumeLayout();
             }
         }
-   
-      
+     
     }
 }

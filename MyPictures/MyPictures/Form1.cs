@@ -67,7 +67,7 @@ namespace MyPictures
 
         private void slideshow_Click(object sender, EventArgs e)
         {
-            Slideshow slideshowForm = new Slideshow();
+          // Slideshow slideshowForm = new Slideshow(ab.content);
         }
 
         private void addFolder_Click(object sender, EventArgs e)
