@@ -14,17 +14,30 @@ namespace MyPictures
     {
         private int move;
         private int maxValX;
+        private int testKey = 0;
         private int maxValY;
-        private ImageList original;
+        private List<Image> original;
 
         public MyPictures()
         {
             InitializeComponent();
-            original = image_View;
+            trackBar.Maximum = 255;
+            trackBar.Minimum = 16;
+            original = new List<Image>();
             move = 0;
             maxValX = 0;
             maxValY = 0;
         }
+
+        //Enregistre les images du drag&drop
+        private void saveImageInFolder(string folderFname)
+        {
+            foreach (Image imageFolder in image_View.Images)
+            {
+                imageFolder.Save(folderFname);
+            }
+        }
+
 
         private void barTitle_MouseDown(object sender, MouseEventArgs e)
         {
@@ -89,10 +102,12 @@ namespace MyPictures
             {
                 miniatureView.BeginUpdate();
                 image_View.Images.Add(Image.FromFile(file));
-                miniatureView.Items.Add(new ListViewItem("oo", 0));
+                miniatureView.Items.Add(new ListViewItem("oo", testKey));
+                testKey++;
                 miniatureView.EndUpdate();
-            }    
-
+                //sauvegarde des images
+                original.Add(Image.FromFile(file));
+            }
         }
 
         private void button_addTag_Click(object sender, EventArgs e)
@@ -124,18 +139,13 @@ namespace MyPictures
 
         private void trackBar_Scroll(object sender, EventArgs e)
         {
+            image_View.ImageSize = new Size(trackBar.Value, trackBar.Value);
 
-            switch (trackBar.Value)
+            foreach (Image currentImage in original)
             {
-                case 0 :
-                    image_View.ImageSize = new Size(40, 40);
-                    image_View.Images.Add(original.Images[0]);
-                    break;
-                case 1 :
-                    image_View.ImageSize = new Size(50, 50);
-                    image_View.Images.Add(original.Images[1]);
-                    break;
+                image_View.Images.Add(currentImage);
             }
+
         }
 
     }

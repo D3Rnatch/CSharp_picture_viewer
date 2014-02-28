@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("default");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("default");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyPictures));
             this.barTitle = new System.Windows.Forms.PictureBox();
             this.button_addFolder = new System.Windows.Forms.Button();
@@ -124,10 +124,10 @@
             this.list_folders.Location = new System.Drawing.Point(2, 56);
             this.list_folders.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.list_folders.Name = "list_folders";
-            treeNode2.Name = "default";
-            treeNode2.Text = "default";
+            treeNode1.Name = "default";
+            treeNode1.Text = "default";
             this.list_folders.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.list_folders.SelectedImageIndex = 0;
             this.list_folders.Size = new System.Drawing.Size(181, 301);
             this.list_folders.TabIndex = 3;
@@ -151,7 +151,7 @@
             // 
             // image_View
             // 
-            this.image_View.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.image_View.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.image_View.ImageSize = new System.Drawing.Size(40, 40);
             this.image_View.TransparentColor = System.Drawing.Color.Transparent;
             // 
