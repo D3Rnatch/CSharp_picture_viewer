@@ -30,9 +30,9 @@ namespace MyPictures
         }
 
         //Enregistre les images du drag&drop
-        private void saveImageInFolder(string folderFname)
+        private void dragdrop_saveImageInFolder(string folderFname)
         {
-            foreach (Image imageFolder in image_View.Images)
+            foreach (Image imageFolder in original)
             {
                 imageFolder.Save(folderFname);
             }
@@ -110,12 +110,52 @@ namespace MyPictures
             }
         }
 
+
+        private void addTag(Album ab)
+        {
+            foreach (string tag in list_tags.Items)
+            {
+                if(ab.tags.Contains(tag)==false)
+                ab.tags.Add(tag);
+            }
+        }
+
+        private void addTag(Picture pic)
+        {
+            foreach (string tag in list_tags.Items)
+            {
+                if (pic.tags.Contains(tag) == false)
+                    pic.tags.Add(tag);
+            }
+        }
+
+        private void removeTag(Album ab)
+        {
+            foreach (string tag in list_tags.Items)
+            {
+                if (ab.tags.Contains(tag) == true)
+                    ab.tags.Remove(tag);
+            }
+        }
+
+        private void removeTag(Picture pic)
+        {
+            foreach (string tag in list_tags.Items)
+            {
+                if (pic.tags.Contains(tag) == true)
+                    pic.tags.Remove(tag);
+            }
+        }
+
         private void button_addTag_Click(object sender, EventArgs e)
         {
             string chaine=write_tags.Text.Trim();
-            
-            if (list_tags.Items.Contains(chaine)==false&&chaine != "")
+
+            if (list_tags.Items.Contains(chaine) == false && chaine != "")
+            {
                 list_tags.Items.Add(chaine);
+
+            }
                 
         }
 
