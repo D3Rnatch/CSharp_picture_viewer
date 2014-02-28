@@ -145,6 +145,30 @@
   <ItemGroup>
     <None Include="Resources\magnifying-glass2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flecheb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flechew.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flechew1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Play-1-Hot-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PlayPlay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PlayPlay1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

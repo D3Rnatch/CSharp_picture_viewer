@@ -15,10 +15,12 @@ namespace MyPictures
         private int move;
         private int maxValX;
         private int maxValY;
+        private ImageList original;
 
         public MyPictures()
         {
             InitializeComponent();
+            original = image_View;
             move = 0;
             maxValX = 0;
             maxValY = 0;
@@ -66,8 +68,6 @@ namespace MyPictures
         private void slideshow_Click(object sender, EventArgs e)
         {
             Slideshow slideshowForm = new Slideshow();
-            slideshowForm.Show();
-
         }
 
         private void addFolder_Click(object sender, EventArgs e)
@@ -76,8 +76,67 @@ namespace MyPictures
             newFolder.Show();
         }
 
-      
+        private void miniatureView_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
 
+        }
+
+        private void miniatureView_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files=(string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files)
+            {
+                miniatureView.BeginUpdate();
+                image_View.Images.Add(Image.FromFile(file));
+                miniatureView.Items.Add(new ListViewItem("oo", 0));
+                miniatureView.EndUpdate();
+            }    
+
+        }
+
+        private void button_addTag_Click(object sender, EventArgs e)
+        {
+            string chaine=write_tags.Text.Trim();
+            
+            if (list_tags.Items.Contains(chaine)==false&&chaine != "")
+                list_tags.Items.Add(chaine);
+                
+        }
+
+        private void button_deleteTag_Click(object sender, EventArgs e)
+        {
+            string chaine=write_tags.Text.Trim();
+
+            if (list_tags.SelectedItems.Count==0&&chaine != "")
+                list_tags.Items.Remove(chaine);
+
+            while(list_tags.SelectedItems.Count>0)
+            list_tags.Items.Remove(list_tags.SelectedItems[0]);
+  
+
+        }
+
+        private void write_tags_MouseClick(object sender, MouseEventArgs e)
+        {
+            list_tags.ClearSelected();
+        }
+
+        private void trackBar_Scroll(object sender, EventArgs e)
+        {
+
+            switch (trackBar.Value)
+            {
+                case 0 :
+                    image_View.ImageSize = new Size(40, 40);
+                    image_View.Images.Add(original.Images[0]);
+                    break;
+                case 1 :
+                    image_View.ImageSize = new Size(50, 50);
+                    image_View.Images.Add(original.Images[1]);
+                    break;
+            }
+        }
 
     }
 }

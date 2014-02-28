@@ -130,11 +130,17 @@
   <data name="picture-delete-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\picture-delete-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="magnifying-glass2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\magnifying-glass2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Folder-Add-icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Folder-Add-icon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Web-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Web-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flechew1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flechew1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="minise7" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minise7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,6 +151,18 @@
   <data name="closeB2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\closeB2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="PlayPlay1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayPlay1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="previous" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\previous.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flechew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flechew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PlayPlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PlayPlay.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="picture-add-icon.png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\picture-add-icon.png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -153,6 +171,9 @@
   </data>
   <data name="plage1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plage1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Play-1-Hot-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Play-1-Hot-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="picture-remove-icon.png" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\picture-remove-icon.png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,7 +184,10 @@
   <data name="logo_icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo_icon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="magnifying-glass2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\magnifying-glass2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="flecheb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flecheb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="next" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

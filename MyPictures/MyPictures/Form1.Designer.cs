@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("default");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("default");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyPictures));
             this.barTitle = new System.Windows.Forms.PictureBox();
             this.button_addFolder = new System.Windows.Forms.Button();
@@ -124,10 +124,10 @@
             this.list_folders.Location = new System.Drawing.Point(2, 56);
             this.list_folders.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.list_folders.Name = "list_folders";
-            treeNode1.Name = "default";
-            treeNode1.Text = "default";
+            treeNode2.Name = "default";
+            treeNode2.Text = "default";
             this.list_folders.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.list_folders.SelectedImageIndex = 0;
             this.list_folders.Size = new System.Drawing.Size(181, 301);
             this.list_folders.TabIndex = 3;
@@ -151,21 +151,23 @@
             // 
             // image_View
             // 
-            this.image_View.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("image_View.ImageStream")));
+            this.image_View.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.image_View.ImageSize = new System.Drawing.Size(40, 40);
             this.image_View.TransparentColor = System.Drawing.Color.Transparent;
-            this.image_View.Images.SetKeyName(0, "Hydrangeas.jpg");
-            this.image_View.Images.SetKeyName(1, "Jellyfish.jpg");
-            this.image_View.Images.SetKeyName(2, "Tulips.jpg");
             // 
             // miniatureView
             // 
             this.miniatureView.AllowDrop = true;
+            this.miniatureView.LargeImageList = this.image_View;
             this.miniatureView.Location = new System.Drawing.Point(187, 36);
             this.miniatureView.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.miniatureView.Name = "miniatureView";
             this.miniatureView.Size = new System.Drawing.Size(685, 401);
+            this.miniatureView.SmallImageList = this.image_View;
             this.miniatureView.TabIndex = 7;
             this.miniatureView.UseCompatibleStateImageBehavior = false;
+            this.miniatureView.DragDrop += new System.Windows.Forms.DragEventHandler(this.miniatureView_DragDrop);
+            this.miniatureView.DragEnter += new System.Windows.Forms.DragEventHandler(this.miniatureView_DragEnter);
             // 
             // searchPictures
             // 
@@ -228,6 +230,7 @@
             this.write_tags.Name = "write_tags";
             this.write_tags.Size = new System.Drawing.Size(159, 20);
             this.write_tags.TabIndex = 14;
+            this.write_tags.MouseClick += new System.Windows.Forms.MouseEventHandler(this.write_tags_MouseClick);
             // 
             // button_addTag
             // 
@@ -239,6 +242,7 @@
             this.button_addTag.Size = new System.Drawing.Size(78, 33);
             this.button_addTag.TabIndex = 15;
             this.button_addTag.UseVisualStyleBackColor = false;
+            this.button_addTag.Click += new System.EventHandler(this.button_addTag_Click);
             // 
             // button_deleteTag
             // 
@@ -250,6 +254,7 @@
             this.button_deleteTag.Size = new System.Drawing.Size(81, 33);
             this.button_deleteTag.TabIndex = 16;
             this.button_deleteTag.UseVisualStyleBackColor = false;
+            this.button_deleteTag.Click += new System.EventHandler(this.button_deleteTag_Click);
             // 
             // button_saveAll
             // 
@@ -308,6 +313,7 @@
             this.trackBar.Name = "trackBar";
             this.trackBar.Size = new System.Drawing.Size(688, 45);
             this.trackBar.TabIndex = 21;
+            this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
             // openImage
             // 
@@ -316,8 +322,10 @@
             // minimize
             // 
             this.minimize.BackColor = System.Drawing.Color.DimGray;
+            this.minimize.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minimize.Image = global::MyPictures.Properties.Resources.minise7;
-            this.minimize.Location = new System.Drawing.Point(952, 0);
+            this.minimize.Location = new System.Drawing.Point(955, 0);
             this.minimize.Margin = new System.Windows.Forms.Padding(0);
             this.minimize.Name = "minimize";
             this.minimize.Size = new System.Drawing.Size(41, 23);
@@ -328,6 +336,8 @@
             // closeForm
             // 
             this.closeForm.BackColor = System.Drawing.Color.DimGray;
+            this.closeForm.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.closeForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.closeForm.Image = global::MyPictures.Properties.Resources.closeB2;
             this.closeForm.Location = new System.Drawing.Point(996, 0);
             this.closeForm.Name = "closeForm";
@@ -339,6 +349,7 @@
             // list_tags
             // 
             this.list_tags.BackColor = System.Drawing.SystemColors.InfoText;
+            this.list_tags.ForeColor = System.Drawing.Color.White;
             this.list_tags.FormattingEnabled = true;
             this.list_tags.Location = new System.Drawing.Point(878, 26);
             this.list_tags.Name = "list_tags";
@@ -405,6 +416,7 @@
             // containerPictures
             // 
             this.containerPictures.BackColor = System.Drawing.Color.SlateBlue;
+            this.containerPictures.BackgroundImage = global::MyPictures.Properties.Resources.plage1;
             this.containerPictures.Controls.Add(this.flowLayoutPanel2);
             this.containerPictures.Controls.Add(this.button_albums);
             this.containerPictures.Controls.Add(this.list_folders);
@@ -427,7 +439,7 @@
             // 
             // flowLayoutPanel5
             // 
-            this.flowLayoutPanel5.BackColor = System.Drawing.Color.SlateBlue;
+            this.flowLayoutPanel5.BackColor = System.Drawing.Color.MediumSlateBlue;
             this.flowLayoutPanel5.Controls.Add(this.button_saveAll);
             this.flowLayoutPanel5.Controls.Add(this.button_addPicture);
             this.flowLayoutPanel5.Controls.Add(this.button_deletePicture);
