@@ -13,7 +13,7 @@ namespace MyPictures
     public partial class Slideshow : Form
     {
         private int changePicture;
-        private int timerInit;
+        private int timerStep;
         private List<Picture> contents;
         Bitmap img; //nouvelle image cree pr adapter les dimensions
 
@@ -22,7 +22,7 @@ namespace MyPictures
             this.WindowState = FormWindowState.Maximized;
             this.contents = content;
             changePicture = 0;
-            timerInit = 100;
+            timerStep = 100;
             this.Show();
             InitializeComponent();
             autoCenterFlowPanel();
@@ -88,10 +88,10 @@ namespace MyPictures
 
         private void button_quicknext_Click(object sender, EventArgs e)
         {
-            if (timer.Enabled==true&&timer.Interval > timerInit)
+            if (timer.Enabled==true&&timer.Interval > timerStep)
             {
                 this.SuspendLayout();
-                timer.Interval= timer.Interval-timerInit;
+                timer.Interval= timer.Interval-timerStep;
                 updateSpeedText(false);
                 this.ResumeLayout();
             }
@@ -100,10 +100,10 @@ namespace MyPictures
 
         private void button_quickprevious_Click(object sender, EventArgs e)
         {
-            if (timer.Enabled ==true && timer.Interval < timerInit * 10)
+            if (timer.Enabled ==true && timer.Interval < timerStep * 10)
             {
                 this.SuspendLayout();
-                timer.Interval += timerInit;
+                timer.Interval += timerStep;
                 updateSpeedText(true);
                 this.ResumeLayout();
             }
