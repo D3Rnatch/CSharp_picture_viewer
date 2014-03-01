@@ -29,8 +29,41 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("default");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("default");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyPictures));
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Description", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("Image", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("File", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Title",
+            ""}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Comments",
+            ""}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))));
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Creation",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Dimensions",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Width",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Height",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Bit depth",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem(new string[] {
+            "type",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem(new string[] {
+            "path",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem(new string[] {
+            "size",
+            ""}, -1);
             this.barTitle = new System.Windows.Forms.PictureBox();
             this.button_addFolder = new System.Windows.Forms.Button();
             this.button_deleteFolder = new System.Windows.Forms.Button();
@@ -58,7 +91,7 @@
             this.closeForm = new System.Windows.Forms.Button();
             this.list_tags = new System.Windows.Forms.ListBox();
             this.detailsPicture = new System.Windows.Forms.ListView();
-            this.Details = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PropertyPicture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -124,10 +157,10 @@
             this.list_folders.Location = new System.Drawing.Point(2, 56);
             this.list_folders.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.list_folders.Name = "list_folders";
-            treeNode1.Name = "default";
-            treeNode1.Text = "default";
+            treeNode2.Name = "default";
+            treeNode2.Text = "default";
             this.list_folders.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.list_folders.SelectedImageIndex = 0;
             this.list_folders.Size = new System.Drawing.Size(181, 301);
             this.list_folders.TabIndex = 3;
@@ -158,6 +191,7 @@
             // miniatureView
             // 
             this.miniatureView.AllowDrop = true;
+            this.miniatureView.HideSelection = false;
             this.miniatureView.LargeImageList = this.image_View;
             this.miniatureView.Location = new System.Drawing.Point(187, 36);
             this.miniatureView.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
@@ -166,6 +200,7 @@
             this.miniatureView.SmallImageList = this.image_View;
             this.miniatureView.TabIndex = 7;
             this.miniatureView.UseCompatibleStateImageBehavior = false;
+            this.miniatureView.SelectedIndexChanged += new System.EventHandler(this.miniatureView_SelectedIndexChanged);
             this.miniatureView.DragDrop += new System.Windows.Forms.DragEventHandler(this.miniatureView_DragDrop);
             this.miniatureView.DragEnter += new System.Windows.Forms.DragEventHandler(this.miniatureView_DragEnter);
             // 
@@ -176,6 +211,8 @@
             this.searchPictures.Name = "searchPictures";
             this.searchPictures.Size = new System.Drawing.Size(450, 26);
             this.searchPictures.TabIndex = 8;
+            this.searchPictures.Click += new System.EventHandler(this.searchPictures_Click);
+            this.searchPictures.TextChanged += new System.EventHandler(this.searchPictures_TextChanged);
             // 
             // button_search
             // 
@@ -359,8 +396,39 @@
             // detailsPicture
             // 
             this.detailsPicture.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Details,
+            this.PropertyPicture,
             this.Value});
+            listViewGroup4.Header = "Description";
+            listViewGroup4.Name = "Description";
+            listViewGroup5.Header = "Image";
+            listViewGroup5.Name = "Image";
+            listViewGroup6.Header = "File";
+            listViewGroup6.Name = "File";
+            this.detailsPicture.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup4,
+            listViewGroup5,
+            listViewGroup6});
+            listViewItem11.Group = listViewGroup4;
+            listViewItem12.Group = listViewGroup4;
+            listViewItem13.Group = listViewGroup4;
+            listViewItem14.Group = listViewGroup5;
+            listViewItem15.Group = listViewGroup5;
+            listViewItem16.Group = listViewGroup5;
+            listViewItem17.Group = listViewGroup5;
+            listViewItem18.Group = listViewGroup6;
+            listViewItem19.Group = listViewGroup6;
+            listViewItem20.Group = listViewGroup6;
+            this.detailsPicture.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem11,
+            listViewItem12,
+            listViewItem13,
+            listViewItem14,
+            listViewItem15,
+            listViewItem16,
+            listViewItem17,
+            listViewItem18,
+            listViewItem19,
+            listViewItem20});
             this.detailsPicture.Location = new System.Drawing.Point(2, 360);
             this.detailsPicture.Margin = new System.Windows.Forms.Padding(2, 3, 0, 0);
             this.detailsPicture.Name = "detailsPicture";
@@ -369,10 +437,10 @@
             this.detailsPicture.UseCompatibleStateImageBehavior = false;
             this.detailsPicture.View = System.Windows.Forms.View.Details;
             // 
-            // Details
+            // PropertyPicture
             // 
-            this.Details.Text = "Name";
-            this.Details.Width = 83;
+            this.PropertyPicture.Text = "Property";
+            this.PropertyPicture.Width = 83;
             // 
             // Value
             // 
@@ -503,7 +571,6 @@
             this.Opacity = 0.99D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyPictures";
-            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.barTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -548,7 +615,7 @@
         private System.Windows.Forms.Button closeForm;
         private System.Windows.Forms.ListBox list_tags;
         private System.Windows.Forms.ListView detailsPicture;
-        private System.Windows.Forms.ColumnHeader Details;
+        private System.Windows.Forms.ColumnHeader PropertyPicture;
         private System.Windows.Forms.ColumnHeader Value;
         private System.Windows.Forms.ImageList image_folders;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

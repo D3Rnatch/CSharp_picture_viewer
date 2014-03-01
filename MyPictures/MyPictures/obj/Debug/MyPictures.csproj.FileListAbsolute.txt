@@ -21,7 +21,6 @@ C:\Users\serber\Documents\Visual Studio 2012\Projects\MyPictures\MyPictures\obj\
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\bin\Debug\MyPictures.exe.config
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\bin\Debug\MyPictures.exe
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\bin\Debug\MyPictures.pdb
-C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.csprojResolveAssemblyReference.cache
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.AddFolder.resources
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.MyPictures.resources
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.Properties.Resources.resources
@@ -29,3 +28,4 @@ C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.csproj.GenerateResource.Cache
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.exe
 C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.pdb
+C:\Users\serber\Documents\GitHub\CSharp_picture_viewer\MyPictures\MyPictures\obj\Debug\MyPictures.csprojResolveAssemblyReference.cache

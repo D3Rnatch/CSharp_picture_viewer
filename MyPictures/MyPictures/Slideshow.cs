@@ -23,12 +23,39 @@ namespace MyPictures
             this.contents = content;
             changePicture = 0;
             timerStep = 100;
+            this.TopLevel = true;
             this.Show();
             InitializeComponent();
             autoCenterFlowPanel();
+            putImageOnPictureBox();
             slideshow_picture.BackColor = Color.FromArgb(70,10,10,10);
             button_previous.BackColor = Color.FromArgb(70, 20, 20, 20);
             button_next.BackColor = Color.FromArgb(70, 20, 20, 20);
+           
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Right:
+                    button_next.PerformClick();
+                    return true; 
+                case Keys.Left:
+                    button_previous.PerformClick();
+                    return true;
+                case Keys.Escape :
+                    this.Close();
+                    return true;
+                case Keys.Oemplus :
+                    button_quicknext.PerformClick();
+                    return true;
+                case Keys.OemMinus :
+                    button_quickprevious.PerformClick();
+                    return true;
+                default:
+                return base.ProcessCmdKey(ref msg, keyData);
+            }
         }
 
         private void autoCenterFlowPanel()
@@ -44,7 +71,7 @@ namespace MyPictures
 
         private void button_play_Click(object sender, EventArgs e)
         {
-
+            
             if (timer.Enabled == true)
             { 
                 timer.Enabled = false;
@@ -55,8 +82,7 @@ namespace MyPictures
                 timer.Enabled = true;
                 //on donne un pas
                 button_play.Image = Properties.Resources.pause;
-               
-                
+
             }
             
         }
@@ -64,10 +90,10 @@ namespace MyPictures
         private void timer_Tick(object sender, EventArgs e)
         {
             
-            if (changePicture < contents.Count)
+            if (changePicture < contents.Count-1)
             {
-                putImageOnPictureBox();
                 changePicture++;
+                putImageOnPictureBox();
             }
             else
                 changePicture = 0;
@@ -131,6 +157,5 @@ namespace MyPictures
                 this.ResumeLayout();
             }
         }
-     
     }
 }

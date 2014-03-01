@@ -31,15 +31,15 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Slideshow));
             this.container_slideshow = new System.Windows.Forms.FlowLayoutPanel();
-            this.speedText = new System.Windows.Forms.Label();
-            this.listTextSlideshow = new System.Windows.Forms.ImageList(this.components);
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.button_previous = new System.Windows.Forms.Button();
             this.button_quickprevious = new System.Windows.Forms.Button();
             this.slideshow_picture = new System.Windows.Forms.PictureBox();
             this.button_play = new System.Windows.Forms.Button();
+            this.speedText = new System.Windows.Forms.Label();
             this.button_next = new System.Windows.Forms.Button();
             this.button_quicknext = new System.Windows.Forms.Button();
+            this.listTextSlideshow = new System.Windows.Forms.ImageList(this.components);
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.container_slideshow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slideshow_picture)).BeginInit();
             this.SuspendLayout();
@@ -58,35 +58,6 @@
             this.container_slideshow.Name = "container_slideshow";
             this.container_slideshow.Size = new System.Drawing.Size(876, 599);
             this.container_slideshow.TabIndex = 6;
-            // 
-            // speedText
-            // 
-            this.speedText.AutoSize = true;
-            this.speedText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.speedText.ForeColor = System.Drawing.Color.White;
-            this.speedText.Location = new System.Drawing.Point(416, 570);
-            this.speedText.Margin = new System.Windows.Forms.Padding(299, 0, 3, 0);
-            this.speedText.Name = "speedText";
-            this.speedText.Size = new System.Drawing.Size(29, 17);
-            this.speedText.TabIndex = 7;
-            this.speedText.Text = " 0x";
-            // 
-            // listTextSlideshow
-            // 
-            this.listTextSlideshow.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("listTextSlideshow.ImageStream")));
-            this.listTextSlideshow.TransparentColor = System.Drawing.Color.Transparent;
-            this.listTextSlideshow.Images.SetKeyName(0, "Chrysanthemum.jpg");
-            this.listTextSlideshow.Images.SetKeyName(1, "Desert.jpg");
-            this.listTextSlideshow.Images.SetKeyName(2, "Hydrangeas.jpg");
-            this.listTextSlideshow.Images.SetKeyName(3, "Jellyfish.jpg");
-            this.listTextSlideshow.Images.SetKeyName(4, "Koala.jpg");
-            this.listTextSlideshow.Images.SetKeyName(5, "Lighthouse.jpg");
-            this.listTextSlideshow.Images.SetKeyName(6, "Tulips.jpg");
-            // 
-            // timer
-            // 
-            this.timer.Interval = 500;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // button_previous
             // 
@@ -141,6 +112,18 @@
             this.button_play.UseVisualStyleBackColor = false;
             this.button_play.Click += new System.EventHandler(this.button_play_Click);
             // 
+            // speedText
+            // 
+            this.speedText.AutoSize = true;
+            this.speedText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.speedText.ForeColor = System.Drawing.Color.White;
+            this.speedText.Location = new System.Drawing.Point(419, 570);
+            this.speedText.Margin = new System.Windows.Forms.Padding(302, 0, 3, 0);
+            this.speedText.Name = "speedText";
+            this.speedText.Size = new System.Drawing.Size(29, 17);
+            this.speedText.TabIndex = 7;
+            this.speedText.Text = " 0x";
+            // 
             // button_next
             // 
             this.button_next.BackColor = System.Drawing.Color.Black;
@@ -171,6 +154,23 @@
             this.button_quicknext.UseVisualStyleBackColor = false;
             this.button_quicknext.Click += new System.EventHandler(this.button_quicknext_Click);
             // 
+            // listTextSlideshow
+            // 
+            this.listTextSlideshow.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("listTextSlideshow.ImageStream")));
+            this.listTextSlideshow.TransparentColor = System.Drawing.Color.Transparent;
+            this.listTextSlideshow.Images.SetKeyName(0, "Chrysanthemum.jpg");
+            this.listTextSlideshow.Images.SetKeyName(1, "Desert.jpg");
+            this.listTextSlideshow.Images.SetKeyName(2, "Hydrangeas.jpg");
+            this.listTextSlideshow.Images.SetKeyName(3, "Jellyfish.jpg");
+            this.listTextSlideshow.Images.SetKeyName(4, "Koala.jpg");
+            this.listTextSlideshow.Images.SetKeyName(5, "Lighthouse.jpg");
+            this.listTextSlideshow.Images.SetKeyName(6, "Tulips.jpg");
+            // 
+            // timer
+            // 
+            this.timer.Interval = 500;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // Slideshow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,10 +179,10 @@
             this.ClientSize = new System.Drawing.Size(977, 633);
             this.Controls.Add(this.container_slideshow);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "Slideshow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Slideshow";
-            this.TopMost = true;
             this.container_slideshow.ResumeLayout(false);
             this.container_slideshow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slideshow_picture)).EndInit();
