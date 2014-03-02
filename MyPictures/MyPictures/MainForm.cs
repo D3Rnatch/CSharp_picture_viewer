@@ -21,6 +21,8 @@ namespace MyPictures
         private List<Picture> listp;
         private ListView oldList;
         private ImageList oldImages;
+        private Album currentAlbum;
+        private ImageViewDisplay dis;
 
         public MyPictures()
         {
@@ -29,7 +31,9 @@ namespace MyPictures
             trackBar.Maximum = 255;
             trackBar.Minimum = 40;
             lp = new List<Picture>();
-            listp = new List<Picture>();
+            currentAlbum = new Album();
+            currentAlbum.content = new List<Picture>();
+            listp = currentAlbum.content;
             Picture pic = new Picture();
             Picture pic2 = new Picture();
             Picture pic3 = new Picture();
@@ -55,7 +59,7 @@ namespace MyPictures
             foreach (Picture imageFolder in listp)
             {
                 Image.FromFile(imageFolder.fname).Save(folderFname);
-               
+
             }
         }
 
@@ -101,7 +105,7 @@ namespace MyPictures
 
         private void slideshow_Click(object sender, EventArgs e)
         {
-           Slideshow slideshowForm = new Slideshow(lp);
+            Slideshow slideshowForm = new Slideshow(lp);
         }
 
         private void addFolder_Click(object sender, EventArgs e)
@@ -118,8 +122,8 @@ namespace MyPictures
 
         private void miniatureView_DragDrop(object sender, DragEventArgs e)
         {
-            string[] files=(string[])e.Data.GetData(DataFormats.FileDrop);
-            Picture pic = new Picture();
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
             List<string> tags = new List<string>();
             tags.Add("chine");
             tags.Add("noir");
@@ -128,14 +132,18 @@ namespace MyPictures
 
             foreach (string file in files)
             {
-                miniatureView.BeginUpdate();
-                image_View.Images.Add(Image.FromFile(file));
-                miniatureView.Items.Add(new ListViewItem(getNameOfImageDrop(file),findLastIndexOfListView()+1));
-                pic.fname = file;
-                pic.name = getNameOfImageDrop(file);
-                pic.tags = tags;
-                listp.Add(pic);
-                miniatureView.EndUpdate();
+                if (Image.FromFile(file) != null)
+                {
+                    Picture pic = new Picture();
+                    miniatureView.BeginUpdate();
+                    image_View.Images.Add(Image.FromFile(file));
+                    miniatureView.Items.Add(new ListViewItem(getNameOfImageDrop(file), findLastIndexOfListView() + 1));
+                    pic.fname = file;
+                    pic.name = getNameOfImageDrop(file);
+                    pic.tags = tags;
+                    listp.Add(pic);
+                    miniatureView.EndUpdate();
+                }
             }
         }
 
@@ -146,9 +154,9 @@ namespace MyPictures
             string[] sselem;
             separator[0] = "\\";
 
-            sselem=file.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+            sselem = file.Split(separator, StringSplitOptions.RemoveEmptyEntries);
             separator[0] = ".";
-            sselem=sselem[sselem.GetLength(0) - 1].Split(separator,StringSplitOptions.RemoveEmptyEntries);
+            sselem = sselem[sselem.GetLength(0) - 1].Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
             return sselem[0];
         }
@@ -156,16 +164,16 @@ namespace MyPictures
         //trouve le dernier index d'une liste
         private int findLastIndexOfListView()
         {
-            int index= -1;
+            int index = -1;
             int length = miniatureView.Items.Count;
-         
-               if(length!=0)
-               index=miniatureView.Items[length-1].ImageIndex;
-           
-           return index;
+
+            if (length != 0)
+                index = miniatureView.Items[length - 1].ImageIndex;
+
+            return index;
         }
 
-        private bool addTag(Album ab,string addtag)
+        private bool addTag(Album ab, string addtag)
         {
             foreach (string tag in list_tags.Items)
             {
@@ -178,7 +186,7 @@ namespace MyPictures
             return false;
         }
 
-        private bool addTag(Picture pic,string addtag)
+        private bool addTag(Picture pic, string addtag)
         {
             foreach (string tag in list_tags.Items)
             {
@@ -191,7 +199,7 @@ namespace MyPictures
             return false;
         }
 
-        private bool removeTag(Album ab,string removetag)
+        private bool removeTag(Album ab, string removetag)
         {
             foreach (string tag in list_tags.Items)
             {
@@ -204,7 +212,7 @@ namespace MyPictures
             return false;
         }
 
-        private bool removeTag(Picture pic,string removetag)
+        private bool removeTag(Picture pic, string removetag)
         {
             foreach (string tag in list_tags.Items)
             {
@@ -219,19 +227,26 @@ namespace MyPictures
 
         private void button_addTag_Click(object sender, EventArgs e)
         {
-            string chaine=write_tags.Text.Trim();
+            string chaine = write_tags.Text.Trim();
 
-            if (currentPicture!=null&&list_tags.Items.Contains(chaine) == false && chaine != "")
+            if (currentPicture != null && list_tags.Items.Contains(chaine) == false && chaine != "")
             {
                 list_tags.Items.Add(chaine);
-                addTag(currentPicture, chaine);
+
+                if (list_folders.SelectedNode != null)
+                {
+                    if (list_folders.SelectedNode.IsSelected == false) addTag(currentPicture, chaine);
+                    else addTag(currentAlbum, chaine);
+                }
+                else
+                    addTag(currentPicture, chaine);
             }
-                
+
         }
 
         private void button_deleteTag_Click(object sender, EventArgs e)
         {
-            string chaine=write_tags.Text.Trim();
+            string chaine = write_tags.Text.Trim();
 
             if (list_tags.SelectedItems.Count == 0 && chaine != "")
             {
@@ -267,18 +282,22 @@ namespace MyPictures
         private void searchPictures_TextChanged(object sender, EventArgs e)
         {
             miniatureView.AllowDrop = false;
+                
             if (searchPictures.Text == "")
             {
-                foreach(ListViewItem item in oldList.Items)
+                miniatureView.Items.Clear();
+
+                foreach (ListViewItem item in oldList.Items)
                     miniatureView.Items.Add((ListViewItem)item.Clone());
 
+                image_View.Images.Clear();
                 foreach (Picture pic in listp)
                 {
                     image_View.Images.Add(Image.FromFile(pic.fname));
                 }
-                oldList.Items.Clear();
-                count = 0;
-                miniatureView.AllowDrop = true; ;
+                
+                count = 0;                        //on permet a nouveau le click
+                miniatureView.AllowDrop = true;   //on permet le drag&drop
             }
 
             else
@@ -287,6 +306,14 @@ namespace MyPictures
                 image_View.Images.Clear();
                 foreach (Picture pic in listp)
                 {
+                    foreach (string tag in pic.tags)
+                    {
+                         if(tag==searchPictures.Text)
+                        {
+                            image_View.Images.Add(Image.FromFile(pic.fname));
+                            miniatureView.Items.Add(new ListViewItem(pic.name, findLastIndexOfListView() + 1));
+                        }
+                    }
                     if (pic.name == searchPictures.Text)
                     {
                         image_View.Images.Add(Image.FromFile(pic.fname));
@@ -299,9 +326,11 @@ namespace MyPictures
 
         private void searchPictures_Click(object sender, EventArgs e)
         {
-            if (count==0&&searchPictures.Text == "")
+            
+            if (count == 0 && searchPictures.Text == "")
             {
                 count++;
+                oldList.Items.Clear();
                 foreach (ListViewItem item in miniatureView.Items)
                 {
                     oldList.Items.Add((ListViewItem)item.Clone());
@@ -312,64 +341,84 @@ namespace MyPictures
 
         private void miniatureView_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            Picture pic = (Picture)getObjectSelected();
+
             //on recupere l'image selectionnee
-            currentPicture=getPictureSelected();
-            if (currentPicture != null)
+            if (pic != null)
             {
+                currentPicture = (Picture)getObjectSelected();
                 setInformationAboutPicture();
-            }           
-            
+            }
+
         }
 
-        private Picture getPictureSelected()
+        private Object getObjectSelected()
         {
             int index = -1;
-            Picture pic=null;
+            Object pic = null;
 
             //on recupere l'index de l'image selectionnee
             for (int i = 0; i < miniatureView.SelectedItems.Count; i++)
-                index=miniatureView.SelectedItems[i].ImageIndex;
+                index = miniatureView.SelectedItems[i].ImageIndex;
 
             list_tags.Items.Clear(); //on nettoye la list des tags
-            resetInformationAboutPicture(); // on nettoye la list des properties
+            resetInformationAboutObject(); // on nettoye la list des properties
             //si une image a ete selectionnee
             if (index != -1)
             {
                 pic = listp[index]; //on trouve l'image dans la list par rapport a l'index
-                foreach (string tag in pic.tags)
+
+                Picture p = (Picture)pic;
+
+                foreach (string tag in p.tags)
                     list_tags.Items.Add(tag); //on reaffiche les tags correspondants a l'image
             }
-            
+
             return pic;
         }
 
         private void setInformationAboutPicture()
         {
-            string[] datas=getAllData();
+            string[] datas = getAllDataPicture();
 
-            for(int i=0;i<detailsPicture.Items.Count;i++)
-            detailsPicture.Items[i].SubItems[1] = new ListViewItem.ListViewSubItem(detailsPicture.Items[i],datas[i]);
+            for (int i = 0; i < detailsPicture.Items.Count; i++)
+                detailsPicture.Items[i].SubItems[1] = new ListViewItem.ListViewSubItem(detailsPicture.Items[i], datas[i]);
         }
 
         //on recupere toutes les donnees servant a l'affichage des properties
-        private string[] getAllData()
+        private string[] getAllDataPicture()
         {
             string[] datas = new string[detailsPicture.Items.Count];
-            datas[0]=currentPicture.name;
-            datas[1]=getInformationCompact(currentPicture.comments);
-            datas[2]=getCreationDate(System.IO.File.GetCreationTime(currentPicture.fname));
-            datas[3]=getDimensionPicture(Image.FromFile(currentPicture.fname).PhysicalDimension);
-            datas[4]=Image.FromFile(currentPicture.fname).Width.ToString();
-            datas[5]=Image.FromFile(currentPicture.fname).Height.ToString();
-            datas[6]=Image.FromFile(currentPicture.fname).PixelFormat.ToString();
-            datas[7]=System.IO.Path.GetExtension(currentPicture.fname);
-            datas[8]=currentPicture.fname;
-            datas[9]=(new System.IO.FileInfo(currentPicture.fname)).Length/1024+" kB";
+            datas[0] = currentPicture.name;
+            datas[1] = getInformationCompact(currentPicture.comments);
+            datas[2] = getCreationDate(System.IO.File.GetCreationTime(currentPicture.fname));
+            datas[3] = getDimensionPicture(Image.FromFile(currentPicture.fname).PhysicalDimension);
+            datas[4] = Image.FromFile(currentPicture.fname).Width.ToString();
+            datas[5] = Image.FromFile(currentPicture.fname).Height.ToString();
+            datas[6] = Image.FromFile(currentPicture.fname).PixelFormat.ToString();
+            datas[7] = System.IO.Path.GetExtension(currentPicture.fname);
+            datas[8] = currentPicture.fname;
+            datas[9] = (new System.IO.FileInfo(currentPicture.fname)).Length / 1024 + " kB";
+            datas[10] = currentPicture.place;
 
             return datas;
         }
 
-        private void resetInformationAboutPicture()
+        private string[] getAllDataAlbum()
+        {
+            string[] datas = new string[detailsPicture.Items.Count];
+            datas[0] = currentAlbum.name;
+            datas[1] = currentAlbum.place;
+            datas[2] = getCreationDate(System.IO.File.GetCreationTime(currentAlbum.fname));
+            datas[7] = System.IO.Path.GetExtension(currentAlbum.fname);
+            datas[8] = currentAlbum.fname;
+            datas[9] = (new System.IO.FileInfo(currentAlbum.fname)).Length / 1024 + " kB";
+            datas[10] = currentAlbum.place;
+            return datas;
+        }
+
+        private void resetInformationAboutObject()
         {
             for (int i = 0; i < detailsPicture.Items.Count; i++)
             {
@@ -379,12 +428,12 @@ namespace MyPictures
 
         public string getCreationDate(DateTime fnameDate)
         {
-            return fnameDate.ToShortDateString() +" "+ fnameDate.ToShortTimeString();
+            return fnameDate.ToShortDateString() + " " + fnameDate.ToShortTimeString();
         }
 
         public string getInformationCompact(List<string> infos)
         {
-            string cinfo="";
+            string cinfo = "";
             if (infos != null)
             {
                 foreach (string info in infos)
@@ -405,12 +454,98 @@ namespace MyPictures
         {
             return dim.Width + "x" + dim.Height;
         }
-        public string getSizePicture(Size size)
+
+        private void list_folders_DragDrop(object sender, DragEventArgs e)
         {
-            return size.Width * size.Height+"";
+            
+           string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            int indexFolder = list_folders.SelectedNode.Index;
+            write_tags.Text = indexFolder+"";
+           /* Album album;
+
+            foreach (Album ab in abList)
+            {
+                if (nameFolder == ab.name)
+                    album = ab;
+            }
+
+            foreach (string file in files)
+            {
+                Picture pic = new Picture();
+                pic.fname = file;
+                pic.name = getNameOfImageDrop(file);
+                album.content.Add(pic);
+            }*/
         }
 
-       
+        private void saveModif(object sender, EventArgs e)
+        {
+            currentPicture.name = dis.editName.Text;
+            currentPicture.place = dis.editPlace.Text;
+            currentPicture.comments = dis.editComments.Lines.ToList();
+            currentPicture.place = dis.editPlace.Text;
+            setInformationAboutPicture();
+        }
+
+        private void miniatureView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            ListViewItem item = miniatureView.HitTest(e.X, e.Y).Item;
+
+            if (item != null)
+            {
+                if (dis != null)
+                {
+                   
+                    dis.pic = currentPicture;
+                    dis.resizeForm();
+                    dis.editName.Text = currentPicture.name;
+                    dis.editPlace.Text = currentPicture.place;
+                    dis.editComments.Lines = currentPicture.comments.ToArray();
+                    dis.Show();
+                }
+                else
+                {
+                    dis = new ImageViewDisplay(currentPicture);
+                    dis.Show();
+                    dis.buttonSave.Click += new System.EventHandler(saveModif);
+                }
+
+            }
+
+        }
+
+        private void list_folders_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void miniatureView_DragLeave(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void list_folders_Click(object sender, EventArgs e)
+        {
+            MouseEventArgs even = (MouseEventArgs)e;
+            list_tags.Items.Clear();
+
+          /*  if (e != null)
+            {
+                TreeNode item = list_folders.HitTest(even.X, even.Y).Node;
+                int index = item.Index;
+                Album ab;
+                list_tags.Items.Clear();
+                foreach (string tag in ab.tags)
+                    list_tags.Items.Add(tag);
+            }*/
+        }
+
+        private void list_folders_Leave(object sender, EventArgs e)
+        {
+            list_tags.Items.Clear();
+        }
 
     }
 
