@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyPictures));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("default");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Nœud0");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Nœud1");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Nœud2");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Nœud3");
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Description", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("File", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Image", System.Windows.Forms.HorizontalAlignment.Left);
@@ -72,7 +76,6 @@
             this.directorySearcher = new System.DirectoryServices.DirectorySearcher();
             this.openImage = new System.Windows.Forms.OpenFileDialog();
             this.title = new System.Windows.Forms.Label();
-            this.logo_barTitle = new System.Windows.Forms.PictureBox();
             this.containerPictures = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button_addFolder = new System.Windows.Forms.Button();
@@ -101,10 +104,10 @@
             this.button_addTag = new System.Windows.Forms.Button();
             this.button_deleteTag = new System.Windows.Forms.Button();
             this.logo_picture = new System.Windows.Forms.PictureBox();
+            this.logo_barTitle = new System.Windows.Forms.PictureBox();
             this.closeForm = new System.Windows.Forms.Button();
             this.minimize = new System.Windows.Forms.Button();
             this.barTitle = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.logo_barTitle)).BeginInit();
             this.containerPictures.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -113,6 +116,7 @@
             this.flowLayoutPanel5.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logo_picture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo_barTitle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barTitle)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,7 +145,7 @@
             // title
             // 
             this.title.AutoSize = true;
-            this.title.BackColor = System.Drawing.Color.DimGray;
+            this.title.BackColor = System.Drawing.Color.Black;
             this.title.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.ForeColor = System.Drawing.Color.White;
             this.title.Location = new System.Drawing.Point(35, 4);
@@ -151,20 +155,9 @@
             this.title.TabIndex = 31;
             this.title.Text = "MyPictures";
             // 
-            // logo_barTitle
-            // 
-            this.logo_barTitle.BackColor = System.Drawing.Color.DimGray;
-            this.logo_barTitle.Image = global::MyPictures.Properties.Resources.logo_icon2;
-            this.logo_barTitle.Location = new System.Drawing.Point(0, 0);
-            this.logo_barTitle.Name = "logo_barTitle";
-            this.logo_barTitle.Size = new System.Drawing.Size(32, 30);
-            this.logo_barTitle.TabIndex = 32;
-            this.logo_barTitle.TabStop = false;
-            // 
             // containerPictures
             // 
-            this.containerPictures.BackColor = System.Drawing.Color.SlateBlue;
-            this.containerPictures.BackgroundImage = global::MyPictures.Properties.Resources.plage1;
+            this.containerPictures.BackColor = System.Drawing.Color.SlateGray;
             this.containerPictures.Controls.Add(this.flowLayoutPanel2);
             this.containerPictures.Controls.Add(this.button_albums);
             this.containerPictures.Controls.Add(this.list_folders);
@@ -182,7 +175,7 @@
             this.containerPictures.Location = new System.Drawing.Point(0, 33);
             this.containerPictures.Margin = new System.Windows.Forms.Padding(0);
             this.containerPictures.Name = "containerPictures";
-            this.containerPictures.Size = new System.Drawing.Size(1048, 563);
+            this.containerPictures.Size = new System.Drawing.Size(1048, 547);
             this.containerPictures.TabIndex = 30;
             // 
             // flowLayoutPanel2
@@ -239,15 +232,27 @@
             this.list_folders.Name = "list_folders";
             treeNode1.Name = "default";
             treeNode1.Text = "default";
+            treeNode2.Name = "Nœud0";
+            treeNode2.Text = "Nœud0";
+            treeNode3.Name = "Nœud1";
+            treeNode3.Text = "Nœud1";
+            treeNode4.Name = "Nœud2";
+            treeNode4.Text = "Nœud2";
+            treeNode5.Name = "Nœud3";
+            treeNode5.Text = "Nœud3";
             this.list_folders.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5});
             this.list_folders.SelectedImageIndex = 0;
             this.list_folders.Size = new System.Drawing.Size(181, 301);
             this.list_folders.TabIndex = 3;
             this.list_folders.Click += new System.EventHandler(this.list_folders_Click);
             this.list_folders.DragDrop += new System.Windows.Forms.DragEventHandler(this.list_folders_DragDrop);
             this.list_folders.DragEnter += new System.Windows.Forms.DragEventHandler(this.list_folders_DragEnter);
-            this.list_folders.Leave += new System.EventHandler(this.list_folders_Leave);
+            this.list_folders.DragOver += new System.Windows.Forms.DragEventHandler(this.list_folders_DragOver);
             // 
             // detailsPicture
             // 
@@ -374,47 +379,53 @@
             this.miniatureView.LargeImageList = this.image_View;
             this.miniatureView.Location = new System.Drawing.Point(187, 36);
             this.miniatureView.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.miniatureView.MultiSelect = false;
             this.miniatureView.Name = "miniatureView";
             this.miniatureView.Size = new System.Drawing.Size(685, 401);
             this.miniatureView.SmallImageList = this.image_View;
             this.miniatureView.TabIndex = 7;
             this.miniatureView.UseCompatibleStateImageBehavior = false;
+            this.miniatureView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.miniatureView_ItemDrag);
             this.miniatureView.SelectedIndexChanged += new System.EventHandler(this.miniatureView_SelectedIndexChanged);
+            this.miniatureView.Click += new System.EventHandler(this.miniatureView_Click);
             this.miniatureView.DragDrop += new System.Windows.Forms.DragEventHandler(this.miniatureView_DragDrop);
             this.miniatureView.DragEnter += new System.Windows.Forms.DragEventHandler(this.miniatureView_DragEnter);
-            this.miniatureView.DragLeave += new System.EventHandler(this.miniatureView_DragLeave);
             this.miniatureView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.miniatureView_MouseDoubleClick);
             // 
             // trackBar
             // 
-            this.trackBar.BackColor = System.Drawing.Color.DarkBlue;
-            this.trackBar.Location = new System.Drawing.Point(184, 437);
-            this.trackBar.Margin = new System.Windows.Forms.Padding(0);
+            this.trackBar.BackColor = System.Drawing.Color.LightGray;
+            this.trackBar.Location = new System.Drawing.Point(187, 437);
+            this.trackBar.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(688, 45);
+            this.trackBar.Size = new System.Drawing.Size(685, 45);
             this.trackBar.TabIndex = 21;
             this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
             // flowLayoutPanel5
             // 
-            this.flowLayoutPanel5.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.flowLayoutPanel5.BackColor = System.Drawing.Color.Gainsboro;
             this.flowLayoutPanel5.Controls.Add(this.button_saveAll);
             this.flowLayoutPanel5.Controls.Add(this.button_addPicture);
             this.flowLayoutPanel5.Controls.Add(this.button_deletePicture);
             this.flowLayoutPanel5.Controls.Add(this.button_removePicture);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(184, 482);
-            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(187, 482);
+            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(688, 60);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(685, 60);
             this.flowLayoutPanel5.TabIndex = 31;
             // 
             // button_saveAll
             // 
-            this.button_saveAll.BackColor = System.Drawing.Color.White;
+            this.button_saveAll.BackColor = System.Drawing.Color.Transparent;
+            this.button_saveAll.FlatAppearance.BorderSize = 0;
+            this.button_saveAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.button_saveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_saveAll.Image = global::MyPictures.Properties.Resources.save_icon;
             this.button_saveAll.Location = new System.Drawing.Point(3, 3);
             this.button_saveAll.Name = "button_saveAll";
-            this.button_saveAll.Size = new System.Drawing.Size(50, 57);
+            this.button_saveAll.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.button_saveAll.Size = new System.Drawing.Size(50, 56);
             this.button_saveAll.TabIndex = 17;
             this.button_saveAll.UseVisualStyleBackColor = false;
             // 
@@ -526,13 +537,23 @@
             this.logo_picture.TabIndex = 32;
             this.logo_picture.TabStop = false;
             // 
+            // logo_barTitle
+            // 
+            this.logo_barTitle.BackColor = System.Drawing.Color.Black;
+            this.logo_barTitle.Image = global::MyPictures.Properties.Resources.logo_icon2;
+            this.logo_barTitle.Location = new System.Drawing.Point(0, 0);
+            this.logo_barTitle.Name = "logo_barTitle";
+            this.logo_barTitle.Size = new System.Drawing.Size(32, 30);
+            this.logo_barTitle.TabIndex = 32;
+            this.logo_barTitle.TabStop = false;
+            // 
             // closeForm
             // 
-            this.closeForm.BackColor = System.Drawing.Color.DimGray;
+            this.closeForm.BackColor = System.Drawing.Color.Black;
             this.closeForm.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.closeForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeForm.Image = global::MyPictures.Properties.Resources.closeB2;
-            this.closeForm.Location = new System.Drawing.Point(996, 0);
+            this.closeForm.Image = global::MyPictures.Properties.Resources.closeB;
+            this.closeForm.Location = new System.Drawing.Point(986, 0);
             this.closeForm.Name = "closeForm";
             this.closeForm.Size = new System.Drawing.Size(42, 23);
             this.closeForm.TabIndex = 23;
@@ -541,11 +562,11 @@
             // 
             // minimize
             // 
-            this.minimize.BackColor = System.Drawing.Color.DimGray;
+            this.minimize.BackColor = System.Drawing.Color.Black;
             this.minimize.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
             this.minimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.minimize.Image = global::MyPictures.Properties.Resources.minise7;
-            this.minimize.Location = new System.Drawing.Point(955, 0);
+            this.minimize.Image = global::MyPictures.Properties.Resources.minise;
+            this.minimize.Location = new System.Drawing.Point(948, 0);
             this.minimize.Margin = new System.Windows.Forms.Padding(0);
             this.minimize.Name = "minimize";
             this.minimize.Size = new System.Drawing.Size(41, 23);
@@ -555,13 +576,13 @@
             // 
             // barTitle
             // 
-            this.barTitle.BackColor = System.Drawing.Color.DimGray;
+            this.barTitle.BackColor = System.Drawing.Color.Black;
             this.barTitle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.barTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.barTitle.Location = new System.Drawing.Point(0, 0);
             this.barTitle.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.barTitle.Name = "barTitle";
-            this.barTitle.Size = new System.Drawing.Size(1050, 30);
+            this.barTitle.Size = new System.Drawing.Size(1045, 30);
             this.barTitle.TabIndex = 0;
             this.barTitle.TabStop = false;
             this.barTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.barTitle_MouseDown);
@@ -572,8 +593,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1050, 589);
+            this.BackColor = System.Drawing.Color.Gray;
+            this.ClientSize = new System.Drawing.Size(1045, 584);
             this.ControlBox = false;
             this.Controls.Add(this.logo_barTitle);
             this.Controls.Add(this.title);
@@ -585,10 +606,9 @@
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MyPictures";
-            this.Opacity = 0.99D;
+            this.Opacity = 0.95D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MyPictures";
-            ((System.ComponentModel.ISupportInitialize)(this.logo_barTitle)).EndInit();
             this.containerPictures.ResumeLayout(false);
             this.containerPictures.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
@@ -599,6 +619,7 @@
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.logo_picture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logo_barTitle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barTitle)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

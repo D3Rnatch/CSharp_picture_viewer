@@ -48,7 +48,11 @@ namespace MyPictures
 
         public void resizeForm()
         {
-            picture.Size = new Size(Image.FromFile(pic.fname).Size.Width/2,Image.FromFile(pic.fname).Size.Height/2);
+            float coeffproportion = (float)Image.FromFile(pic.fname).Size.Width / (float)Image.FromFile(pic.fname).Size.Height;
+            float newH = Screen.PrimaryScreen.Bounds.Height - 100;
+            float newW =newH*coeffproportion;
+            
+            picture.Size = new Size((int)newW, (int)newH);
             this.Size = new Size(picture.Size.Width + panelInfo.Size.Width, picture.Size.Height+40);
             Bitmap img = new Bitmap(Image.FromFile(pic.fname),picture.Size);
             picture.Image = img;

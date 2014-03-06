@@ -30,22 +30,22 @@
         {
             this.picture = new System.Windows.Forms.PictureBox();
             this.panelInfo = new System.Windows.Forms.Panel();
-            this.label_title = new System.Windows.Forms.Label();
-            this.edit_title = new System.Windows.Forms.TextBox();
-            this.label_comments = new System.Windows.Forms.Label();
-            this.edit_comments = new System.Windows.Forms.TextBox();
-            this.label_place = new System.Windows.Forms.Label();
-            this.edit_place = new System.Windows.Forms.TextBox();
             this.button_saveInfo = new System.Windows.Forms.Button();
+            this.edit_place = new System.Windows.Forms.TextBox();
+            this.label_place = new System.Windows.Forms.Label();
+            this.edit_comments = new System.Windows.Forms.TextBox();
+            this.label_comments = new System.Windows.Forms.Label();
+            this.edit_title = new System.Windows.Forms.TextBox();
+            this.label_title = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picture)).BeginInit();
             this.panelInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // picture
             // 
-            this.picture.Location = new System.Drawing.Point(13, 0);
+            this.picture.Location = new System.Drawing.Point(1, 0);
             this.picture.Name = "picture";
-            this.picture.Size = new System.Drawing.Size(664, 489);
+            this.picture.Size = new System.Drawing.Size(676, 489);
             this.picture.TabIndex = 0;
             this.picture.TabStop = false;
             // 
@@ -64,38 +64,22 @@
             this.panelInfo.Size = new System.Drawing.Size(228, 489);
             this.panelInfo.TabIndex = 1;
             // 
-            // label_title
+            // button_saveInfo
             // 
-            this.label_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_title.Location = new System.Drawing.Point(13, 41);
-            this.label_title.Name = "label_title";
-            this.label_title.Size = new System.Drawing.Size(203, 20);
-            this.label_title.TabIndex = 0;
-            this.label_title.Text = "Title";
+            this.button_saveInfo.Location = new System.Drawing.Point(73, 306);
+            this.button_saveInfo.Name = "button_saveInfo";
+            this.button_saveInfo.Size = new System.Drawing.Size(75, 23);
+            this.button_saveInfo.TabIndex = 6;
+            this.button_saveInfo.Text = "save";
+            this.button_saveInfo.UseVisualStyleBackColor = true;
+            this.button_saveInfo.Click += new System.EventHandler(this.button_saveInfo_Click);
             // 
-            // edit_title
+            // edit_place
             // 
-            this.edit_title.Location = new System.Drawing.Point(17, 64);
-            this.edit_title.Name = "edit_title";
-            this.edit_title.Size = new System.Drawing.Size(199, 20);
-            this.edit_title.TabIndex = 1;
-            // 
-            // label_comments
-            // 
-            this.label_comments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_comments.Location = new System.Drawing.Point(13, 104);
-            this.label_comments.Name = "label_comments";
-            this.label_comments.Size = new System.Drawing.Size(203, 20);
-            this.label_comments.TabIndex = 2;
-            this.label_comments.Text = "Comments";
-            // 
-            // edit_comments
-            // 
-            this.edit_comments.Location = new System.Drawing.Point(17, 127);
-            this.edit_comments.Multiline = true;
-            this.edit_comments.Name = "edit_comments";
-            this.edit_comments.Size = new System.Drawing.Size(199, 74);
-            this.edit_comments.TabIndex = 3;
+            this.edit_place.Location = new System.Drawing.Point(17, 249);
+            this.edit_place.Name = "edit_place";
+            this.edit_place.Size = new System.Drawing.Size(199, 20);
+            this.edit_place.TabIndex = 5;
             // 
             // label_place
             // 
@@ -106,22 +90,38 @@
             this.label_place.TabIndex = 4;
             this.label_place.Text = "Place";
             // 
-            // edit_place
+            // edit_comments
             // 
-            this.edit_place.Location = new System.Drawing.Point(17, 249);
-            this.edit_place.Name = "edit_place";
-            this.edit_place.Size = new System.Drawing.Size(199, 20);
-            this.edit_place.TabIndex = 5;
+            this.edit_comments.Location = new System.Drawing.Point(17, 127);
+            this.edit_comments.Multiline = true;
+            this.edit_comments.Name = "edit_comments";
+            this.edit_comments.Size = new System.Drawing.Size(199, 74);
+            this.edit_comments.TabIndex = 3;
             // 
-            // button_saveInfo
+            // label_comments
             // 
-            this.button_saveInfo.Location = new System.Drawing.Point(73, 306);
-            this.button_saveInfo.Name = "button_saveInfo";
-            this.button_saveInfo.Size = new System.Drawing.Size(75, 23);
-            this.button_saveInfo.TabIndex = 6;
-            this.button_saveInfo.Text = "save";
-            this.button_saveInfo.UseVisualStyleBackColor = true;
-            this.button_saveInfo.Click += new System.EventHandler(this.button_saveInfo_Click);
+            this.label_comments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_comments.Location = new System.Drawing.Point(13, 104);
+            this.label_comments.Name = "label_comments";
+            this.label_comments.Size = new System.Drawing.Size(203, 20);
+            this.label_comments.TabIndex = 2;
+            this.label_comments.Text = "Comments";
+            // 
+            // edit_title
+            // 
+            this.edit_title.Location = new System.Drawing.Point(17, 64);
+            this.edit_title.Name = "edit_title";
+            this.edit_title.Size = new System.Drawing.Size(199, 20);
+            this.edit_title.TabIndex = 1;
+            // 
+            // label_title
+            // 
+            this.label_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_title.Location = new System.Drawing.Point(13, 41);
+            this.label_title.Name = "label_title";
+            this.label_title.Size = new System.Drawing.Size(203, 20);
+            this.label_title.TabIndex = 0;
+            this.label_title.Text = "Title";
             // 
             // ImageViewDisplay
             // 

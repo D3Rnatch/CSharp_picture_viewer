@@ -26,8 +26,8 @@ namespace MyPictures
             this.TopLevel = true;
             this.Show();
             InitializeComponent();
-            autoCenterFlowPanel();
             putImageOnPictureBox();
+            autoCenterFlowPanel();
             slideshow_picture.BackColor = Color.FromArgb(70,10,10,10);
             button_previous.BackColor = Color.FromArgb(70, 20, 20, 20);
             button_next.BackColor = Color.FromArgb(70, 20, 20, 20);
@@ -60,13 +60,29 @@ namespace MyPictures
 
         private void autoCenterFlowPanel()
         {
-            container_slideshow.Location = new Point((this.Width - container_slideshow.Width )/ 2, (this.Height - container_slideshow.Height )/ 2);
+            container_slideshow.Location = new Point((this.Width - container_slideshow.Width )/ 2,60);
+            control_slideshow.Location = new Point((this.Width - control_slideshow.Width) / 2, control_slideshow.Location.Y+60);
         }
 
         private void putImageOnPictureBox()
         {
+            resizeControls();
             img = new Bitmap(Image.FromFile(contents[changePicture].fname), slideshow_picture.Size);
             slideshow_picture.Image = img;
+        }
+
+        private void resizeControls()
+        {
+            float coeffproportion = (float)Image.FromFile(contents[changePicture].fname).Size.Width / (float)Image.FromFile(contents[changePicture].fname).Size.Height;
+            float newH = Screen.PrimaryScreen.Bounds.Height - 200;
+            float newW = newH * coeffproportion;
+
+            slideshow_picture.Size = new Size((int)newW, (int)newH);
+            button_previous.Size = new Size(button_previous.Width, slideshow_picture.Height);
+            button_next.Size = new Size(button_previous.Width, slideshow_picture.Height);
+
+            container_slideshow.Size = new Size(2 * button_previous.Width + slideshow_picture.Width, slideshow_picture.Height);
+
         }
 
         private void button_play_Click(object sender, EventArgs e)

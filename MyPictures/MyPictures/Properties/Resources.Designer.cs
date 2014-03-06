@@ -73,6 +73,26 @@ namespace MyPictures.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap closeB {
+            get {
+                object obj = ResourceManager.GetObject("closeB", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap closeB1 {
+            get {
+                object obj = ResourceManager.GetObject("closeB1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap closeB2 {
             get {
                 object obj = ResourceManager.GetObject("closeB2", resourceCulture);
@@ -176,6 +196,16 @@ namespace MyPictures.Properties {
         internal static System.Drawing.Bitmap magnifying_glass2 {
             get {
                 object obj = ResourceManager.GetObject("magnifying-glass2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap minise {
+            get {
+                object obj = ResourceManager.GetObject("minise", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

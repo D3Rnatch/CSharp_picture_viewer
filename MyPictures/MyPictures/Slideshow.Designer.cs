@@ -34,29 +34,27 @@
             this.button_previous = new System.Windows.Forms.Button();
             this.button_quickprevious = new System.Windows.Forms.Button();
             this.slideshow_picture = new System.Windows.Forms.PictureBox();
-            this.button_play = new System.Windows.Forms.Button();
             this.speedText = new System.Windows.Forms.Label();
             this.button_next = new System.Windows.Forms.Button();
             this.button_quicknext = new System.Windows.Forms.Button();
+            this.button_play = new System.Windows.Forms.Button();
             this.listTextSlideshow = new System.Windows.Forms.ImageList(this.components);
             this.timer = new System.Windows.Forms.Timer(this.components);
+            this.control_slideshow = new System.Windows.Forms.Panel();
             this.container_slideshow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slideshow_picture)).BeginInit();
+            this.control_slideshow.SuspendLayout();
             this.SuspendLayout();
             // 
             // container_slideshow
             // 
             this.container_slideshow.Controls.Add(this.button_previous);
-            this.container_slideshow.Controls.Add(this.button_quickprevious);
             this.container_slideshow.Controls.Add(this.slideshow_picture);
-            this.container_slideshow.Controls.Add(this.button_play);
-            this.container_slideshow.Controls.Add(this.speedText);
             this.container_slideshow.Controls.Add(this.button_next);
-            this.container_slideshow.Controls.Add(this.button_quicknext);
             this.container_slideshow.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.container_slideshow.Location = new System.Drawing.Point(36, 22);
             this.container_slideshow.Name = "container_slideshow";
-            this.container_slideshow.Size = new System.Drawing.Size(876, 599);
+            this.container_slideshow.Size = new System.Drawing.Size(884, 532);
             this.container_slideshow.TabIndex = 6;
             // 
             // button_previous
@@ -79,7 +77,7 @@
             this.button_quickprevious.FlatAppearance.BorderSize = 0;
             this.button_quickprevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_quickprevious.Image = global::MyPictures.Properties.Resources.previous;
-            this.button_quickprevious.Location = new System.Drawing.Point(20, 525);
+            this.button_quickprevious.Location = new System.Drawing.Point(309, 3);
             this.button_quickprevious.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.button_quickprevious.Name = "button_quickprevious";
             this.button_quickprevious.Size = new System.Drawing.Size(75, 42);
@@ -97,27 +95,12 @@
             this.slideshow_picture.TabIndex = 2;
             this.slideshow_picture.TabStop = false;
             // 
-            // button_play
-            // 
-            this.button_play.BackColor = System.Drawing.Color.Black;
-            this.button_play.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
-            this.button_play.FlatAppearance.BorderSize = 0;
-            this.button_play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_play.Image = global::MyPictures.Properties.Resources.PlayPlay;
-            this.button_play.Location = new System.Drawing.Point(397, 525);
-            this.button_play.Margin = new System.Windows.Forms.Padding(280, 3, 3, 3);
-            this.button_play.Name = "button_play";
-            this.button_play.Size = new System.Drawing.Size(75, 42);
-            this.button_play.TabIndex = 5;
-            this.button_play.UseVisualStyleBackColor = false;
-            this.button_play.Click += new System.EventHandler(this.button_play_Click);
-            // 
             // speedText
             // 
             this.speedText.AutoSize = true;
             this.speedText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.speedText.ForeColor = System.Drawing.Color.White;
-            this.speedText.Location = new System.Drawing.Point(419, 570);
+            this.speedText.Location = new System.Drawing.Point(416, 48);
             this.speedText.Margin = new System.Windows.Forms.Padding(302, 0, 3, 0);
             this.speedText.Name = "speedText";
             this.speedText.Size = new System.Drawing.Size(29, 17);
@@ -146,13 +129,28 @@
             this.button_quicknext.FlatAppearance.BorderSize = 0;
             this.button_quicknext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_quicknext.Image = global::MyPictures.Properties.Resources.next;
-            this.button_quicknext.Location = new System.Drawing.Point(764, 525);
+            this.button_quicknext.Location = new System.Drawing.Point(480, 3);
             this.button_quicknext.Margin = new System.Windows.Forms.Padding(20, 3, 3, 3);
             this.button_quicknext.Name = "button_quicknext";
             this.button_quicknext.Size = new System.Drawing.Size(75, 42);
             this.button_quicknext.TabIndex = 6;
             this.button_quicknext.UseVisualStyleBackColor = false;
             this.button_quicknext.Click += new System.EventHandler(this.button_quicknext_Click);
+            // 
+            // button_play
+            // 
+            this.button_play.BackColor = System.Drawing.Color.Black;
+            this.button_play.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.button_play.FlatAppearance.BorderSize = 0;
+            this.button_play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_play.Image = global::MyPictures.Properties.Resources.PlayPlay;
+            this.button_play.Location = new System.Drawing.Point(394, 3);
+            this.button_play.Margin = new System.Windows.Forms.Padding(280, 3, 3, 3);
+            this.button_play.Name = "button_play";
+            this.button_play.Size = new System.Drawing.Size(75, 42);
+            this.button_play.TabIndex = 5;
+            this.button_play.UseVisualStyleBackColor = false;
+            this.button_play.Click += new System.EventHandler(this.button_play_Click);
             // 
             // listTextSlideshow
             // 
@@ -171,21 +169,36 @@
             this.timer.Interval = 500;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
+            // control_slideshow
+            // 
+            this.control_slideshow.Controls.Add(this.button_quickprevious);
+            this.control_slideshow.Controls.Add(this.button_play);
+            this.control_slideshow.Controls.Add(this.speedText);
+            this.control_slideshow.Controls.Add(this.button_quicknext);
+            this.control_slideshow.Location = new System.Drawing.Point(36, 572);
+            this.control_slideshow.Name = "control_slideshow";
+            this.control_slideshow.Size = new System.Drawing.Size(884, 70);
+            this.control_slideshow.TabIndex = 8;
+            // 
             // Slideshow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(977, 633);
+            this.ClientSize = new System.Drawing.Size(977, 702);
+            this.ControlBox = false;
+            this.Controls.Add(this.control_slideshow);
             this.Controls.Add(this.container_slideshow);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "Slideshow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Slideshow";
             this.container_slideshow.ResumeLayout(false);
-            this.container_slideshow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.slideshow_picture)).EndInit();
+            this.control_slideshow.ResumeLayout(false);
+            this.control_slideshow.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -202,5 +215,6 @@
         private System.Windows.Forms.ImageList listTextSlideshow;
         private System.Windows.Forms.Timer timer;
         private System.Windows.Forms.Label speedText;
+        private System.Windows.Forms.Panel control_slideshow;
     }
 }

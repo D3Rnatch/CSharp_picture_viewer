@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace MyPictures
 {
@@ -34,6 +35,8 @@ namespace MyPictures
             currentAlbum = new Album();
             currentAlbum.content = new List<Picture>();
             listp = currentAlbum.content;
+            currentAlbum = new Album();
+            currentAlbum.tags.AddRange(new string[] { "ab", "top", "zop" });
             Picture pic = new Picture();
             Picture pic2 = new Picture();
             Picture pic3 = new Picture();
@@ -129,46 +132,112 @@ namespace MyPictures
             tags.Add("noir");
 
             miniatureView.Focus();
-
-            foreach (string file in files)
+            if (files != null)
             {
-                if (Image.FromFile(file) != null)
+                foreach (string file in files)
                 {
-                    Picture pic = new Picture();
-                    miniatureView.BeginUpdate();
-                    image_View.Images.Add(Image.FromFile(file));
-                    miniatureView.Items.Add(new ListViewItem(getNameOfImageDrop(file), findLastIndexOfListView() + 1));
-                    pic.fname = file;
-                    pic.name = getNameOfImageDrop(file);
-                    pic.tags = tags;
-                    listp.Add(pic);
-                    miniatureView.EndUpdate();
+                    if (checkedFile(file))
+                    {
+                        Picture pic = new Picture();
+                        miniatureView.BeginUpdate();
+                        image_View.Images.Add(Image.FromFile(file));
+                        miniatureView.Items.Add(new ListViewItem(getNameOfImage(file, "\\") + getCopyNumber(getNameOfImage(file, "\\")), findLastIndexOfListView() + 1));
+                        oldList.Items.Add(new ListViewItem(getNameOfImage(file, "\\") + getCopyNumber(getNameOfImage(file, "\\")), findLastIndexOfListView()));
+                        pic.fname = file;
+                        pic.name = getNameOfImage(file, "\\") + getCopyNumber(getNameOfImage(file, "\\"));
+                        pic.tags = tags;
+                        listp.Add(pic);
+                        miniatureView.EndUpdate();
+                    }
+                    else
+                        MessageBox.Show("l'application ne gère pas  l'extension " + System.IO.Path.GetExtension(file));
                 }
             }
         }
 
+        private string getCopyNumber(string name)
+        {
+            string copy = "";
+            int count=0;
+            //code a completer
+            foreach(Picture pic in listp)
+            {
+                if (pic.name == name||pic.name == name+"("+count+")")
+                {
+                    count++;
+                }
+            }
+
+            if (count > 0)
+            {
+                copy = "(" + count + ")";
+            }
+
+            return copy;
+        }
+
+        //controle si le fichier est une image
+        private bool checkedFile(string file)
+        {
+            ImageCodecInfo[] codecInfo = ImageCodecInfo.GetImageEncoders();
+            string codecObtain = "";
+
+            foreach (ImageCodecInfo codec in codecInfo)
+            {
+
+                codecObtain = codec.CodecName.Replace("Built-in", " ");
+                codecObtain = codecObtain.Replace("Codec", " ").Trim().ToLower();
+
+                if (System.IO.Path.GetExtension(file).Contains(codecObtain) || System.IO.Path.GetExtension(file).Contains("jpg"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         //obtenir le nom de l'image deposee
-        private string getNameOfImageDrop(string file)
+        private string getNameOfImage(string file,string s)
+        {
+            string[] sselem;
+            sselem=getsselemFile(file,s);
+            sselem=sselem[sselem.GetLength(0)-1].Split(new string[]{"."},StringSplitOptions.RemoveEmptyEntries);
+            return sselem[sselem.Length-2];
+        }
+
+        private string getPathOfImage(string file,string s)
+        {
+            string[] sselem;
+            string path="";
+            
+            sselem =getsselemFile(file,s);
+
+            for(int i=0;i<sselem.GetLength(0)-1;i++)
+                path=path+sselem[i]+"/";
+
+            return path;
+        }
+
+        //obtenir les sous element du chemin du fichier c-a-dire chaque dossier 
+        private string[] getsselemFile(string file,string s)
         {
             string[] separator = new string[1];
             string[] sselem;
-            separator[0] = "\\";
-
+            separator[0] = s;
+            
             sselem = file.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-            separator[0] = ".";
-            sselem = sselem[sselem.GetLength(0) - 1].Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
-            return sselem[0];
+            //retourne les dossiers et le fichier
+            return sselem;
         }
 
-        //trouve le dernier index d'une liste
+        //trouve le dernier index d'une listeView
         private int findLastIndexOfListView()
         {
             int index = -1;
             int length = miniatureView.Items.Count;
 
             if (length != 0)
-                index = miniatureView.Items[length - 1].ImageIndex;
+                index = miniatureView.Items[length - 1].Index;
 
             return index;
         }
@@ -177,7 +246,7 @@ namespace MyPictures
         {
             foreach (string tag in list_tags.Items)
             {
-                if (ab.tags.Contains(tag) == false)
+                if (ab!=null&&ab.tags.Contains(tag) == false)
                 {
                     ab.tags.Add(addtag);
                     return true;
@@ -190,7 +259,7 @@ namespace MyPictures
         {
             foreach (string tag in list_tags.Items)
             {
-                if (pic.tags.Contains(tag) == false)
+                if (pic!=null&&pic.tags.Contains(tag) == false)
                 {
                     pic.tags.Add(addtag);
                     return true;
@@ -203,7 +272,7 @@ namespace MyPictures
         {
             foreach (string tag in list_tags.Items)
             {
-                if (ab.tags.Contains(tag) == true)
+                if (ab!=null&&ab.tags.Contains(tag) == true)
                 {
                     ab.tags.Remove(removetag);
                     return true;
@@ -216,7 +285,7 @@ namespace MyPictures
         {
             foreach (string tag in list_tags.Items)
             {
-                if (pic.tags.Contains(tag) == true)
+                if (pic!=null&&pic.tags.Contains(tag) == true)
                 {
                     pic.tags.Remove(removetag);
                     return true;
@@ -229,17 +298,14 @@ namespace MyPictures
         {
             string chaine = write_tags.Text.Trim();
 
-            if (currentPicture != null && list_tags.Items.Contains(chaine) == false && chaine != "")
+            if ((currentPicture != null||currentAlbum!=null) && list_tags.Items.Contains(chaine) == false && chaine != "")
             {
                 list_tags.Items.Add(chaine);
-
-                if (list_folders.SelectedNode != null)
-                {
-                    if (list_folders.SelectedNode.IsSelected == false) addTag(currentPicture, chaine);
-                    else addTag(currentAlbum, chaine);
-                }
+                 
+                if(list_folders.SelectedNode!=null&&list_folders.SelectedNode.IsSelected==true)
+                    addTag(currentAlbum, chaine);
                 else
-                    addTag(currentPicture, chaine);
+                   addTag(currentPicture, chaine);
             }
 
         }
@@ -289,12 +355,6 @@ namespace MyPictures
 
                 foreach (ListViewItem item in oldList.Items)
                     miniatureView.Items.Add((ListViewItem)item.Clone());
-
-                image_View.Images.Clear();
-                foreach (Picture pic in listp)
-                {
-                    image_View.Images.Add(Image.FromFile(pic.fname));
-                }
                 
                 count = 0;                        //on permet a nouveau le click
                 miniatureView.AllowDrop = true;   //on permet le drag&drop
@@ -303,25 +363,29 @@ namespace MyPictures
             else
             {
                 miniatureView.Items.Clear(); //on nettoye la list
-                image_View.Images.Clear();
+               
                 foreach (Picture pic in listp)
                 {
                     foreach (string tag in pic.tags)
                     {
-                         if(tag==searchPictures.Text)
+                         if(tag.StartsWith(searchPictures.Text))
                         {
-                            image_View.Images.Add(Image.FromFile(pic.fname));
-                            miniatureView.Items.Add(new ListViewItem(pic.name, findLastIndexOfListView() + 1));
+                            miniatureView.Items.Add(new ListViewItem(pic.name, findIndexPicture(listp,pic)));
                         }
                     }
-                    if (pic.name == searchPictures.Text)
+                    if (pic.name.StartsWith(searchPictures.Text))
                     {
-                        image_View.Images.Add(Image.FromFile(pic.fname));
-                        miniatureView.Items.Add(new ListViewItem(pic.name, findLastIndexOfListView() + 1));
+                        miniatureView.Items.Add(new ListViewItem(pic.name, findIndexPicture(listp,pic)));
                     }
                 }
             }
 
+        }
+
+        //trouve l'index de l'image par le chemin dans une list<Picture> 
+        private int findIndexPicture(List<Picture> list,Picture p)
+        {
+            return list.FindIndex(x => x.fname == p.fname && x.name==p.name);
         }
 
         private void searchPictures_Click(object sender, EventArgs e)
@@ -341,16 +405,7 @@ namespace MyPictures
 
         private void miniatureView_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            Picture pic = (Picture)getObjectSelected();
-
-            //on recupere l'image selectionnee
-            if (pic != null)
-            {
-                currentPicture = (Picture)getObjectSelected();
-                setInformationAboutPicture();
-            }
-
+            setcurrentPicture();
         }
 
         private Object getObjectSelected()
@@ -361,7 +416,7 @@ namespace MyPictures
             //on recupere l'index de l'image selectionnee
             for (int i = 0; i < miniatureView.SelectedItems.Count; i++)
                 index = miniatureView.SelectedItems[i].ImageIndex;
-
+            write_tags.Text = index + "";
             list_tags.Items.Clear(); //on nettoye la list des tags
             resetInformationAboutObject(); // on nettoye la list des properties
             //si une image a ete selectionnee
@@ -378,7 +433,8 @@ namespace MyPictures
             return pic;
         }
 
-        private void setInformationAboutPicture()
+        //met a jour les informations sur la photo dans la listView Details
+        private void updateInformationAboutPicture()
         {
             string[] datas = getAllDataPicture();
 
@@ -457,11 +513,17 @@ namespace MyPictures
 
         private void list_folders_DragDrop(object sender, DragEventArgs e)
         {
-            
-           string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-            int indexFolder = list_folders.SelectedNode.Index;
-            write_tags.Text = indexFolder+"";
+           Bitmap files = (Bitmap)e.Data.GetData(DataFormats.Bitmap);
+           TreeNode node = getNode(e.X,e.Y);
+
+           if(node!=null)
+           {
+
+           }
+           
+           //int indexFolder = list_folders.GetNodeAt(e.X, e.Y).Index;
+           // write_tags.Text = indexFolder+"";
            /* Album album;
 
             foreach (Album ab in abList)
@@ -479,25 +541,50 @@ namespace MyPictures
             }*/
         }
 
-        private void saveModif(object sender, EventArgs e)
+        private void updateInformationMiniatureView()
         {
-            currentPicture.name = dis.editName.Text;
-            currentPicture.place = dis.editPlace.Text;
-            currentPicture.comments = dis.editComments.Lines.ToList();
-            currentPicture.place = dis.editPlace.Text;
-            setInformationAboutPicture();
+            int index = findIndexPicture(listp,currentPicture);
+            int indextest = miniatureView.SelectedItems[0].Index;
+           
+                miniatureView.Items[indextest].Text = currentPicture.name;
+                oldList.Items[index].Text = currentPicture.name;
+            
         }
 
+        private void saveModif(object sender, EventArgs e)
+        {
+            int index=updateListPicture(dis.editName.Text,dis.editPlace.Text,dis.editComments.Lines.ToList());
+            updateCurrentPicture(index);
+            updateInformationAboutPicture();
+            updateInformationMiniatureView();
+            dis.Close();
+        }
+
+        //mettre a jour l'image courante
+        private void updateCurrentPicture(int index)
+        {
+            currentPicture = listp[index];
+        }
+        //mettre a jour la list d'image
+        private int updateListPicture(string name,string place,List<string> comments)
+        {
+            int index = findIndexPicture(listp,currentPicture);
+            listp[index].name = name;
+            listp[index].place = place;
+            listp[index].comments = comments;
+            return index;
+        }
+        
         private void miniatureView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
 
             ListViewItem item = miniatureView.HitTest(e.X, e.Y).Item;
-
+            
             if (item != null)
             {
                 if (dis != null)
                 {
-                   
+                   //si la fenetre a dja ete ouvert on met a jour les informations
                     dis.pic = currentPicture;
                     dis.resizeForm();
                     dis.editName.Text = currentPicture.name;
@@ -521,30 +608,73 @@ namespace MyPictures
             e.Effect = DragDropEffects.Copy;
         }
 
-        private void miniatureView_DragLeave(object sender, EventArgs e)
-        {
-           
-        }
-
         private void list_folders_Click(object sender, EventArgs e)
         {
             MouseEventArgs even = (MouseEventArgs)e;
             list_tags.Items.Clear();
+            list_folders.Focus();
+            miniatureView.HideSelection = true;
 
-          /*  if (e != null)
+            if (even!= null)
             {
                 TreeNode item = list_folders.HitTest(even.X, even.Y).Node;
                 int index = item.Index;
-                Album ab;
-                list_tags.Items.Clear();
-                foreach (string tag in ab.tags)
+                //... a completer code pr obtenir l'album select 
+               
+                foreach (string tag in currentAlbum.tags)
                     list_tags.Items.Add(tag);
-            }*/
+            }
         }
 
-        private void list_folders_Leave(object sender, EventArgs e)
+
+        private void miniatureView_Click(object sender, EventArgs e)
         {
-            list_tags.Items.Clear();
+            setcurrentPicture();
+        }
+
+        void setcurrentPicture()
+        {
+            list_folders.SelectedNode = null;
+            Picture pic = (Picture)getObjectSelected();
+
+            //on recupere l'image selectionnee
+            if (pic != null)
+            {
+                currentPicture = pic;
+                updateInformationAboutPicture();
+            }
+            else
+                currentPicture = null;
+        }
+
+        private void list_folders_DragOver(object sender, DragEventArgs e)
+        {
+
+            TreeNode node = getNode(e.X,e.Y);
+
+            if (node != null)
+            {
+               //on selectionne le noeud
+               list_folders.SelectedNode = node;
+               list_folders.Select();
+            }
+            
+        }
+
+        private TreeNode getNode(int x,int y)
+        {
+            Point pt = new Point(x, y);
+            pt = list_folders.PointToClient(pt);
+            //on recupere le node sur lequel on veut faire le deposer
+            TreeNode node = list_folders.GetNodeAt(pt);
+
+            return node;
+        }
+
+        private void miniatureView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            if (miniatureView.SelectedItems.Count > 0) miniatureView.DoDragDrop(image_View.Images[miniatureView.SelectedItems[0].ImageIndex], DragDropEffects.Copy);
+
         }
 
     }
